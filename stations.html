@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Metro Rail Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="jquery-1.6.js"></script>
+		<script src="jquery.jqzoom-core.js"></script>
+		<link href="jquery.jqzoom.css" rel="stylesheet" />
+		<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+		<link href="magnify.css" rel="stylesheet" type="text/css">
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="jquery.magnify.js"></script>
+		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+		<link rel="icon" href="imgs/logo4.png">
+		<style>
+			/* animated slideshow*/
+			.mySlides {display:none}
+			.demo {cursor:pointer}
+		</style>
+		<style>
+			/* Remove the navbar's default margin-bottom and rounded borders */ 
+			.navbar {
+			  margin-bottom: 0;
+			  border-radius: 0;
+			  font-family:Segoe UI;
+			
+			}
+			  .jumbotron {
+			  margin-bottom: 0;
+			}
+			
+			/* Add a gray background color and some padding to the footer */
+			footer {
+			  background-color: #f2f2f2;
+			  padding: 25px;
+			}
+			
+			.carousel-inner img {
+				width: 100%; /* Set width to 100% */
+				margin: auto;
+				min-height:200px;
+			}
+
+			/* Hide the carousel text when the screen is less than 600 pixels wide */
+			@media (max-width: 600px) {
+				.carousel-caption {
+					display: none; 
+				}
+			}
+		  
+			/* added */
+		  
+		  
+			.items, .items2{
+				margin: 0 auto;
+				max-width:auto;
+				padding-top:0px;
+			}
+			.items a, .items2 a{
+				display:inline-block;
+				text-decoration:none;
+				color:white;
+				font-family: 'Montserrat', sans-serif;
+				text-transform: uppercase;
+				font-size: 20px;
+				font-weight:400;
+				margin:0 20px;
+				height: 40px;
+				overflow: hidden;
+			}
+			.items a span{
+				display: inline-block;
+				position:relative;
+				transition: transform 600ms;
+				-webkit-transition: -webkit-transform 500ms;
+				-moz-transition: transform 500ms;
+		  
+			}
+			.items a span:after{
+				content: attr(data-hover);
+				position: absolute;
+				top: -32px;
+				left:0;
+				transform: translate3d(0,0,0);
+				-moz-transform: translate3d(0,0,0);
+				-webkit-transform: translate3d(0,0,0);
+			}
+			.items a:hover span,
+			.items a:focus span {
+				transform: translateY(25px);
+				-webkit-transform: translateY(30px);
+				-moz-transform: translateY(30px);
+			}  
+
+			.ul{
+				width:100%;
+				position:fixed;
+				top:0;
+				margin-top:100%;
+				margin:0;
+				padding:0;
+				overflow:hidden;
+			
+			}
+			/* magnify*/
+			.magnify { width:100%; height:100%; margin:30px auto;}
+			body {
+				position: relative; 
+			}
+			.affix {
+				top:0;
+				width: 100%;
+				z-index: 9999 !important;
+			}
+			.navbar {
+				margin-bottom: 0px;
+			}
+ 
+			.affix ~ .container-fluid {
+				position: relative;
+				top: 50px;
+			}
+			
+		</style>
+		<!----------------------modal image------------------->
+		<style>
+			#myImg {
+				border-radius: 5px;
+				cursor: pointer;
+				transition: 0.3s;
+			}
+
+			#myImg:hover {opacity: 0.7;}
+
+			/* The Modal (background) */
+			.modal {
+				display: none; /* Hidden by default */
+				position: fixed; /* Stay in place */
+				z-index: 1; /* Sit on top */
+				padding-top: 100px; /* Location of the box */
+				left: 0;
+				top: 0;
+				width: 100%; /* Full width */
+				height: 100%; /* Full height */
+				overflow: auto; /* Enable scroll if needed */
+				background-color: rgb(0,0,0); /* Fallback color */
+				background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+			}
+
+			/* Modal Content (image) */
+			.modal-content {
+				margin: auto;
+				display: block;
+				width: 80%;
+				max-width: 700px;
+			}
+
+			/* Caption of Modal Image */
+			#caption {
+				margin: auto;
+				display: block;
+				width: 80%;
+				max-width: 700px;
+				text-align: center;
+				color: #ccc;
+				padding: 10px 0;
+				height: 150px;
+			}
+
+			/* Add Animation */
+			.modal-content, #caption {    
+				-webkit-animation-name: zoom;
+				-webkit-animation-duration: 0.6s;
+				animation-name: zoom;
+				animation-duration: 0.6s;
+			}
+
+			@-webkit-keyframes zoom {
+				from {-webkit-transform:scale(0)} 
+				to {-webkit-transform:scale(1)}
+			}
+
+			@keyframes zoom {
+				from {transform:scale(0)} 
+				to {transform:scale(1)}
+			}
+
+			/* The Close Button */
+			.close {
+				position: absolute;
+				top: 15px;
+				right: 35px;
+				color: #f1f1f1;
+				font-size: 40px;
+				font-weight: bold;
+				transition: 0.3s;
+			}
+
+			.close:hover,
+			.close:focus {
+				color: #bbb;
+				text-decoration: none;
+				cursor: pointer;
+			}
+
+			/* 100% Image Width on Smaller Screens */
+			@media only screen and (max-width: 700px){
+				.modal-content {
+					width: 100%;
+				}
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="container-fluid" style="background-color:#eddeed">
+			<div class="row">
+				<div class="col-sm-1"><a href="metro.html" title="visakha metro">
+					<img src="imgs/logo4.png" width=100 height=100 alt="visakha metro"/></a>
+				</div>
+				<div class="col-sm-10"><h1><center>Visakha Metro Rail Corporation Ltd.</center></h1>      
+					<p><center>Mission, Vission & Values</center></p>
+						
+				</div>
+				<div class="col-sm-1"><a href="metro.html" title="visakha metro">
+					<img src="imgs/edited.png" width=100 height=100 alt="visakha metro"/></a>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid;one">
+			<section class="items">
+				<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>                        
+							</button>
+							<a class="navbar-brand" href="metro.html"><i class="fa fa-subway" style="font-size:25px;color:"></i></a>
+						</div>
+						<div class="collapse navbar-collapse" id="myNavbar">
+							<ul class="nav navbar-nav">
+								<li><a href="metro.html"><span data-hover="Home">Home</span></a></li>
+								<li><a href="gallery.html"><span data-hover="Gallery">Gallery</span></a></li>
+								<li><a href="routes.htm"><span data-hover="Routes">Routes</span></a></li>
+								<li><a href="#"><span data-hover="Stations">Stations</span></a></li>
+								<li><a href="#"><span data-hover="Fare">Fare</span></a></li>
+								<li><a href="#"><span data-hover="Time-table">Time-table</span></a></li>
+								<li><a href="http://127.0.1:8081/contact"><span data-hover="Contact">Contact</span></a></li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="http://localhost:8080/loginn.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</section>
+		</div>
+		<hr>
+		<div class="w3-card-12;w3-panel w3-topbar w3-border-green ">
+			<header class="w3-container w3-blue" style="height:45px">
+				<h4><center>Stations Details</center></h4>
+			</header>	<hr>
+			<center><img id="myImg" class="img-responsive" src="imgs/table2.png" alt="Stations List, Visakha Metro" width="300" height="200"></center>
+		</div>
+		<div id="myModal" class="modal">
+		  <span class="close">&times;</span>
+		  <img class="modal-content" id="img01">
+		  <div id="caption"></div>
+		</div>
+		<script>
+			// Get the modal
+			var modal = document.getElementById('myModal');
+
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById('myImg');
+			var modalImg = document.getElementById("img01");
+			var captionText = document.getElementById("caption");
+			img.onclick = function(){
+				modal.style.display = "block";
+				modalImg.src = this.src;
+				captionText.innerHTML = this.alt;
+			}
+
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() { 
+				modal.style.display = "none";
+			}
+		</script>
+	</body>	
+</html>	
